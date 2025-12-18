@@ -3,9 +3,9 @@
 # 02-python-ai.sh - Python + AI knihovny (kompatibilní verze)
 # Ubuntu 25.10 AI Development Environment
 #
-# VERZE KOMPATIBILITY (prosinec 2024):
+# VERZE KOMPATIBILITY (prosinec 2024 - RTX 5060 Ti Blackwell):
 #   Python: 3.11
-#   PyTorch: 2.5.1 + CUDA 12.4
+#   PyTorch: 2.5.1 + CUDA 12.6 (Blackwell support)
 #   TensorFlow: 2.18.0
 #   JAX: 0.4.35
 #===============================================================================
@@ -46,8 +46,10 @@ conda activate ai
 # CORE ML FRAMEWORKS (kompatibilní verze)
 #===============================================================================
 
-# PyTorch 2.5.1 + CUDA 12.4 (oficiálně podporovaná kombinace)
-pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+# PyTorch 2.5.1 + CUDA 12.6 (pro RTX 5060 Ti Blackwell)
+# Poznámka: cu126 wheel může být nightly, pokud není dostupný, použije se cu124
+pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu126 || \
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu126
 
 # TensorFlow 2.18 (kompatibilní s CUDA 12.x)
 pip install tensorflow==2.18.0 tensorflow-hub==0.16.1 tensorflow-datasets==4.9.6

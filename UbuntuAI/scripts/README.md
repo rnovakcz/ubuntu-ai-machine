@@ -5,7 +5,7 @@ Kompletní sada skriptů pro nastavení Ubuntu 25.10 jako AI vývojového prost�
 ## ✨ Co obsahuje
 
 ### Systém & Jazyky
-- **NVIDIA**: Driver 550, CUDA 12.4, cuDNN 9, TensorRT, NCCL
+- **NVIDIA**: Driver 565, CUDA 12.6, cuDNN 9, TensorRT, NCCL (RTX 5060 Ti ready!)
 - **Python**: 3.11, Mambaforge, Conda/Mamba
 - **Node.js**: 22 LTS, TypeScript 5.6, npm, yarn, pnpm
 - **Go**: 1.23
@@ -174,7 +174,9 @@ code ~/ai-workspace
 ## ⚠️ Požadavky
 
 - Ubuntu 25.10 (nebo 24.04+)
-- NVIDIA GPU (doporučeno, ne nutné)
+- **NVIDIA GPU** - optimalizováno pro RTX 5060 Ti (Blackwell)
+  - Driver: 565+
+  - CUDA: 12.6
 - 50GB+ volného místa
 - 16GB+ RAM (32GB doporučeno)
 

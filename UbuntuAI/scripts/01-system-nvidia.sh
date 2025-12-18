@@ -3,8 +3,9 @@
 # 01-system-nvidia.sh - Základní systém, NVIDIA ovladače, CUDA
 # Ubuntu 25.10 AI Development Environment
 #
-# VERZE KOMPATIBILITY (prosinec 2024):
-#   CUDA: 12.4 (nejstabilnější pro PyTorch/TensorFlow)
+# VERZE KOMPATIBILITY (prosinec 2024 - RTX 5060 Ti Blackwell):
+#   NVIDIA Driver: 565+ (nutné pro RTX 50 series)
+#   CUDA: 12.6 (Blackwell architektura)
 #   Python: 3.11 (nejlepší AI kompatibilita)
 #   Node.js: 22 LTS
 #   Go: 1.23.x
@@ -167,9 +168,9 @@ if [[ -z "$SKIP_NVIDIA" ]]; then
     dpkg -i /tmp/cuda-keyring.deb && rm /tmp/cuda-keyring.deb
     apt update
 
-    # CUDA 12.4 - nejlepší kompatibilita s PyTorch 2.5 a TensorFlow 2.18
-    log "Instalace NVIDIA Driver 550 + CUDA Toolkit 12.4..."
-    apt install -y nvidia-driver-550 cuda-toolkit-12-4 libcudnn9-cuda-12
+    # RTX 5060 Ti (Blackwell) vyžaduje CUDA 12.6+ a nejnovější ovladače
+    log "Instalace NVIDIA Driver 565+ CUDA Toolkit 12.6 (pro RTX 50 series)..."
+    apt install -y nvidia-driver-565 cuda-toolkit-12-6 libcudnn9-cuda-12
 
     log "Instalace NCCL a TensorRT..."
     apt install -y libnccl2 libnccl-dev || true
@@ -183,12 +184,12 @@ if [[ -z "$SKIP_NVIDIA" ]]; then
     apt update && apt install -y nvidia-container-toolkit
 
     cat > /etc/profile.d/cuda.sh << 'EOF'
-export CUDA_HOME=/usr/local/cuda-12.4
+export CUDA_HOME=/usr/local/cuda-12.6
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 EOF
     chmod +x /etc/profile.d/cuda.sh
-    ln -sf /usr/local/cuda-12.4 /usr/local/cuda
+    ln -sf /usr/local/cuda-12.6 /usr/local/cuda
 
     echo -e "blacklist nouveau\noptions nouveau modeset=0" > /etc/modprobe.d/blacklist-nouveau.conf
     update-initramfs -u

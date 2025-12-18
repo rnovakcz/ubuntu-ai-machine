@@ -67,13 +67,13 @@ EOF
 systemctl daemon-reload
 systemctl enable ollama --now
 
-#--- Docker images ---
+#--- Docker images (CUDA 12.6 pro RTX 5060 Ti) ---
 log "Stahování AI Docker images..."
 docker pull ollama/ollama:latest || true
-docker pull nvidia/cuda:12.6.0-cudnn-runtime-ubuntu24.04 || true
-docker pull pytorch/pytorch:2.4.0-cuda12.4-cudnn9-runtime || true
+docker pull nvidia/cuda:12.6.1-cudnn-runtime-ubuntu24.04 || true
+docker pull pytorch/pytorch:2.5.1-cuda12.6-cudnn9-runtime || true
 docker pull ghcr.io/huggingface/text-generation-inference:latest || true
-docker pull nvcr.io/nvidia/tritonserver:24.08-py3 || true
+docker pull nvcr.io/nvidia/tritonserver:24.10-py3 || true
 
 #--- Docker Compose šablony ---
 log "Vytváření Docker Compose šablon..."
